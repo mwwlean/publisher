@@ -1,4 +1,4 @@
-import { supabase } from "../app/lib/supabaseClient";
+import { supabase } from "./utils/supabase/clients";
 
 export default async function Home() {
   //testing purposes

@@ -1,4 +1,4 @@
-import SignUp from '@/components/Auth/Signup'; // Adjust the import path based on your setup
+import SignUp from '@/components/Auth/Signup'; 
 
 export default function SignUpPage() {
   return <SignUp />;

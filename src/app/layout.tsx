@@ -1,3 +1,4 @@
+import React from "react";
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import "./globals.css";
@@ -20,6 +21,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link rel="icon" href="/icon.jpg" />
+      </head>
       <body
         className={`${montserrat.variable} antialiased`}
         style={{ overflowX: 'hidden' }}

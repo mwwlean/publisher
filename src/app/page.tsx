@@ -1,24 +1,10 @@
-import { supabase } from "./utils/supabase/clients";
+import Navbar from "@/components/Navbar";
 
-export default async function Home() {
-  //testing purposes
-  const { data: users, error } = await supabase
-    .from("users")
-    .select("firstname");
-
-  if (error) {
-    console.error("Error fetching users:", error);
-    return <div>Error loading users</div>;
-  }
-
+export default function Home() {
   return (
     <main>
-      <h1>Users</h1>
-      <ul>
-        {users.map((user, index) => (
-          <li key={index}>{user.firstname}</li>
-        ))}
-      </ul>
+      <Navbar></Navbar>
+      <h1>Landing Page</h1>
     </main>
   );
 }

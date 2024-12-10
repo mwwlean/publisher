@@ -4,37 +4,32 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { supabase } from '@/services/clients';
 
-import Link from "next/link";
+import Link from "next/link"
 
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/button"
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+} from "@/components/ui/card"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
 
-const SignUp = () => {
+export function LoginForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
   const router = useRouter();
 
-  const handleSignUp = async () => {
-    if (password !== confirmPassword) {
-      setError('Passwords do not match');
-      return;
-    }
+  const handleLogin = async () => {
+    const { error } = await supabase.auth.signInWithPassword({ email, password });
 
-    const { error } = await supabase.auth.signUp({ email, password });
     if (error) {
       setError(error.message);
     } else {
-      alert('Signup successful! Check your email for a confirmation link.');
+      alert('Login successful!');
       router.push('/dashboard');
     }
   };
@@ -42,9 +37,9 @@ const SignUp = () => {
   return (
     <Card className="mx-auto max-w-sm">
       <CardHeader>
-        <CardTitle className="text-2xl">Sign Up</CardTitle>
+        <CardTitle className="text-2xl">Login</CardTitle>
         <CardDescription>
-          Enter your email below to create a new account
+          Enter your email below to login to your account
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -60,7 +55,12 @@ const SignUp = () => {
             />
           </div>
           <div className="grid gap-2">
-            <Label htmlFor="password">Password</Label>
+            <div className="flex items-center">
+              <Label htmlFor="password">Password</Label>
+              <Link href="#" className="ml-auto inline-block text-sm underline">
+                Forgot your password?
+              </Link>
+            </div>
             <Input
               placeholder="Password"
               value={password}
@@ -69,32 +69,23 @@ const SignUp = () => {
               required
             />
           </div>
-          <div className="grid gap-2">
-            <Label htmlFor="confirmPassword">Confirm Password</Label>
-            <Input
-              placeholder="Confirm Password"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              type="password"
-              required
-            />
-          </div>
           <div className='py-2 text-red-500'>
-            {error && <p>{error}</p>}
+           {error && <p>{error}</p>}
           </div>
-          <Button onClick={handleSignUp} type="submit" className="w-full">
-            Sign Up
+          <Button onClick={handleLogin} type="submit" className="w-full">
+            Login
           </Button>
+          {/* <Button variant="outline" className="w-full">
+            Login with Google
+          </Button> */}
         </div>
         <div className="mt-4 text-center text-sm">
-          Already have an account?{" "}
-          <Link href="/login" className="underline">
-            Login
+          Don&apos;t have an account?{" "}
+          <Link href="/signup" className="underline">
+            Sign up
           </Link>
         </div>
       </CardContent>
     </Card>
   );
-};
-
-export default SignUp;
+}

@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { supabase } from './src/services/clients';  // Adjust the path based on your setup
+import { supabase } from '@/services/clients';  
 
 export async function middleware(req: Request) {
   // Get session from Supabase

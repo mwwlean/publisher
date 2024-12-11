@@ -156,6 +156,18 @@ const Navbar = () => {
                             </a>
                             {user && (
                                 <NavigationMenu>
+                                    <a
+                                        className={cn(
+                                            'text-muted-foreground',
+                                            navigationMenuTriggerStyle,
+                                            buttonVariants({
+                                                variant: 'ghost',
+                                            }),
+                                        )}
+                                        href="#"
+                                    >
+                                     Community
+                                    </a>
                                     <NavigationMenuList>
                                         <NavigationMenuItem className="text-muted-foreground">
                                             <NavigationMenuTrigger>

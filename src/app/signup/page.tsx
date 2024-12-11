@@ -2,7 +2,7 @@ import { ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 import SignUp from '@/components/auth/Signup';
 
-export default function SignUpPage() {
+export default function Signup() {
   return (
     <div className="flex h-screen w-full items-center justify-center px-4">
       <div className="flex flex-col items-center">

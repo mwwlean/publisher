@@ -11,7 +11,8 @@ const Hero = () => {
       <div className="grid items-center gap-8 lg:grid-cols-2">
         <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
           <div className="text-left font-normal">
-            <AnimatedShinyText>Proudly developed by <span className='text-sky-500'>Jan Leander</span> ✨</AnimatedShinyText>
+          <AnimatedShinyText>Work In Progress</AnimatedShinyText>
+            {/* <AnimatedShinyText>Proudly developed by <span className='text-sky-500'>Jan Leander</span> ✨</AnimatedShinyText> */}
           </div>
           <h1 className="my-6 text-pretty text-4xl font-bold lg:text-6xl">
             The Publisher's Web

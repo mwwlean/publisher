@@ -1,28 +1,48 @@
-import { ArrowRight, Check } from 'lucide-react';
-import Link from 'next/link';
-import { buttonVariants } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
+"use client";
+
+import { ArrowRight, Check } from "lucide-react";
+import Link from "next/link";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import { useEffect, useState } from "react";
+import { supabase } from "@/services/clients";
 
 const Cta = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const checkUser = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      setIsLoggedIn(!!user);
+      setIsLoading(false); 
+    };
+    checkUser();
+  }, []);
+
+  if (isLoading) {
+    return <span>Loading...</span>; //loading state
+  }
+
   return (
     <section className="py-32">
       <div className="container">
         <div className="flex flex-col items-center justify-between gap-8 rounded-lg bg-accent p-6 md:flex-row lg:px-20 lg:py-16">
           <div className="w-full">
-            <h4 className="mb-1 text-2xl font-bold md:text-3xl">
-                Become a Publisher
-            </h4>
+            <h4 className="mb-1 text-2xl font-bold md:text-3xl">Become a Publisher</h4>
             <p className="text-muted-foreground">
-                Join our platform and transform your ideas into published works. Connect with a community of readers and fellow creators while showcasing your unique voice.
+              Join our platform and transform your ideas into published works. Connect with a
+              community of readers and fellow creators while showcasing your unique voice.
             </p>
             <Link
-              href="/signup"
+              href={isLoggedIn ? "/dashboard" : "/signup"}
               className={cn(
-                buttonVariants({ variant: 'link' }),
-                'mt-8 px-0 hover:underline transition-all ease-in'
+                buttonVariants({ variant: "link" }),
+                "mt-8 px-0 hover:underline transition-all ease-in"
               )}
             >
-              Get Started <ArrowRight className="ml-2 size-4" />
+              {isLoggedIn ? "Go to Dashboard" : "Get Started"}
+              <ArrowRight className="ml-2 size-4" />
             </Link>
           </div>
           <div className="w-full">

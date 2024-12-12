@@ -41,7 +41,7 @@ const Footer = () => {
                   <img
                     src="/logo.png"
                     alt="logo"
-                    className="h-11"
+                    className="h-11 rounded-lg"
                   />
                   <p className="text-3xl font-semibold">Publisher</p>
                 </span>
